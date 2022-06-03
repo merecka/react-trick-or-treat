@@ -20,9 +20,9 @@ function Login({ setIsLoggedIn, users }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    
+
     users.find(user => {
-      if (user.name.toLowerCase() == formData.username.toLowerCase() && user.password.toLowerCase() == formData.password.toLowerCase()) {
+      if (user.name.toLowerCase() === formData.username.toLowerCase() && user.password.toLowerCase() === formData.password.toLowerCase()) {
         setLoggedInUser(user);
         setIsLoggedIn(true);
     

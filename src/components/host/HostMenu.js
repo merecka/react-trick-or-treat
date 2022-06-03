@@ -3,7 +3,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import * as dayjs from 'dayjs'
 
-function HostMenu() {
+function HostMenu({onUpdateUser}) {
   const [startTime, setStartTime] = useState(new Date());
   const [endTime, setEndTime] = useState(new Date());
   const [startDate, setStartDate] = useState(null);
@@ -25,6 +25,8 @@ function HostMenu() {
     setStartDate(new Date(currentYear, 9, 31, startTime.getHours(), startTime.getMinutes(), 0));
     setEndDate(new Date(currentYear, 9, 31, endTime.getHours(), endTime.getMinutes(), 0));
     setToEdit(false);
+    onUpdateUser(startDate, endDate);
+
   }
 
   function toggleEditMenu() {setToEdit(!toEdit) };
