@@ -7,6 +7,7 @@ import HostMenu from "./HostMenu";
 
 function Host({ isLoggedIn }) {
   const { loggedInUser, setLoggedInUser } = useContext(UserContext);
+  const address = loggedInUser ? loggedInUser.street + ' ' + loggedInUser.city + ', ' + loggedInUser.state + ' ' + loggedInUser.zipcode : null;
   
   if (!isLoggedIn) return <Redirect to="/login" />;
 
@@ -35,8 +36,8 @@ function Host({ isLoggedIn }) {
     <div>
       <Header />
       <h1>Home!</h1>
-      <Map />
-      <h2>{loggedInUser.address}</h2>
+      {/* <Map /> */}
+      <h2>{address}</h2>
       <HostMenu onUpdateUser={updateLoggedInUser} />
     </div>
   );

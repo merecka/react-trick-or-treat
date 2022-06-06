@@ -11,22 +11,15 @@ function HostMenu({onUpdateUser}) {
   const [toEdit, setToEdit] = useState(true);
 
   const currentYear = startTime.getFullYear();
-  // const startDate;
-  // const endDate;
 
   function handleSubmit(event) {
     event.preventDefault();
 
-    console.log(startTime.getHours());
-    console.log(startTime.getMinutes());
-    console.log(endTime.getHours());
-    console.log(endTime.getMinutes());
-
+    // January = 0, December = 11
     setStartDate(new Date(currentYear, 9, 31, startTime.getHours(), startTime.getMinutes(), 0));
     setEndDate(new Date(currentYear, 9, 31, endTime.getHours(), endTime.getMinutes(), 0));
     setToEdit(false);
     onUpdateUser(startDate, endDate);
-
   }
 
   function toggleEditMenu() {setToEdit(!toEdit) };
@@ -37,7 +30,7 @@ function HostMenu({onUpdateUser}) {
       <button onClick={toggleEditMenu} style={{ visibility: toEdit ? 'hidden': 'visible'}}>Edit</button>
       <div style={{ display: toEdit ? null : 'none'}}>
         <form onSubmit={handleSubmit}>
-          <label for="fname">Start Time:</label><br />
+          <label>Start Time:</label><br />
           <DatePicker
             selected={startTime}
             onChange={(date) => setStartTime(date)}
@@ -47,7 +40,7 @@ function HostMenu({onUpdateUser}) {
             timeCaption="Time"
             dateFormat="h:mm aa"
           />
-          <label for="fname">End Time:</label><br />
+          <label>End Time:</label><br />
           <DatePicker
             selected={endTime}
             onChange={(date) => setEndTime(date)}

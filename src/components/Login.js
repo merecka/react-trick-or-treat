@@ -41,14 +41,14 @@ function Login({ setIsLoggedIn, users }) {
     <div>
       <form onSubmit={handleSubmit}>
         <h1>Login</h1>
-        <label for="fname">Username:</label><br />
+        <label>Username:</label><br />
         <input
           type="text"
           name="username"
           value={formData.username.toString()}
           onChange={handleChange}
         />
-        <label for="fname">Password:</label><br />
+        <label>Password:</label><br />
         <input
           type="password"
           name="password"

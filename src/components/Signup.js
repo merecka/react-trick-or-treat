@@ -47,7 +47,7 @@ function Signup({ setIsLoggedIn, users, setUsers }) {
   return (
     <form onSubmit={handleSubmit}>
       <h1>Login</h1>
-      <label for="fname">Name:</label><br />
+      <label>Name:</label><br />
       <input
         type="text"
         name="name"
@@ -55,11 +55,35 @@ function Signup({ setIsLoggedIn, users, setUsers }) {
         onChange={handleChange}
       />
       <br />
-      <label for="fname">Address:</label><br />
+      <label>Street:</label><br />
       <input
         type="text"
-        name="address"
-        value={formData.address}
+        name="street"
+        value={formData.street}
+        onChange={handleChange}
+      />
+      <br />
+      <label for="fname">City:</label><br />
+      <input
+        type="text"
+        name="city"
+        value={formData.city}
+        onChange={handleChange}
+      />
+      <br />
+      <label for="fname">State:</label><br />
+      <input
+        type="text"
+        name="state"
+        value={formData.state}
+        onChange={handleChange}
+      />
+      <br />
+      <label for="fname">Zip Code:</label><br />
+      <input
+        type="text"
+        name="zipcode"
+        value={formData.zipcode}
         onChange={handleChange}
       />
       <br />
