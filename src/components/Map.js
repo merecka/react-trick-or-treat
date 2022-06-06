@@ -31,7 +31,7 @@ function Map() {
   //   // Important! Always set the container height explicitly
   //   <div style={{ height: '100vh', width: '100%' }}>
   //     <GoogleMapReact
-  //       bootstrapURLKeys={{ key: "AIzaSyAZijEQx8GBD0nLNiyUllDtqR_JMI1JbFU" }}
+  //       bootstrapURLKeys={{ key: "" }}
   //       defaultCenter={defaultProps.center}
   //       defaultZoom={defaultProps.zoom}
   //     >
