@@ -2,11 +2,12 @@ import React, { useContext } from "react";
 import { Redirect } from "react-router-dom";
 import { UserContext } from "../../context/user";
 import Header from "../Header";
-import Map from "../Map";
+import Map from "../Map/Map";
 import HostMenu from "./HostMenu";
 
-function Host({ isLoggedIn }) {
+function Host({ isLoggedIn, users }) {
   const { loggedInUser, setLoggedInUser } = useContext(UserContext);
+
   const address = loggedInUser ? loggedInUser.street + ' ' + loggedInUser.city + ', ' + loggedInUser.state + ' ' + loggedInUser.zipcode : null;
   
   if (!isLoggedIn) return <Redirect to="/login" />;
@@ -36,7 +37,7 @@ function Host({ isLoggedIn }) {
     <div>
       <Header />
       <h1>Home!</h1>
-      {/* <Map /> */}
+      <Map users={users} />
       <h2>{address}</h2>
       <HostMenu onUpdateUser={updateLoggedInUser} />
     </div>

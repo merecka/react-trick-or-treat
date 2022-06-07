@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Route } from "react-router-dom";
 import Login from './components/Login';
 import { UserProvider } from './context/user';
@@ -13,24 +13,23 @@ function App() {
   useEffect(() => {
     fetch("http://localhost:4000/users")
       .then((r) => r.json())
-      .then((users) => setUsers(users));
-
+      .then((users) => setUsers(users))
       console.log("current users are: " + JSON.stringify(users))
-  }, [isLoggedIn])
+  }, [isLoggedIn]
+  )
   
-
   return (
     <div className="App">
       <UserProvider>
-        <Route exact path="/login">
-          <Login setIsLoggedIn={setIsLoggedIn} users={users} />
-        </Route>
-        <Route exact path="/signup">
-          <Signup setIsLoggedIn={setIsLoggedIn} setUsers={setUsers} users={users} />
-        </Route>
-        <Route exact path="/">
-          <Host isLoggedIn={isLoggedIn} />
-        </Route>  
+          <Route exact path="/login">
+            <Login setIsLoggedIn={setIsLoggedIn} users={users} />
+          </Route>
+          <Route exact path="/signup">
+            <Signup setIsLoggedIn={setIsLoggedIn} setUsers={setUsers} users={users} />
+          </Route>
+          <Route exact path="/">
+            <Host isLoggedIn={isLoggedIn} users={users} />
+          </Route>  
       </UserProvider>
     </div>
   );

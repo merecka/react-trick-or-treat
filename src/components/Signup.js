@@ -16,6 +16,9 @@ function Signup({ setIsLoggedIn, users, setUsers }) {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
+      "address": formData.street + ' ' + formData.city + ', ' + formData.state + ' ' + formData.zipcode,
+      "lat": null,
+      "lng": null,
       "starttime": null,
       "endtime" : null
     });
@@ -25,6 +28,17 @@ function Signup({ setIsLoggedIn, users, setUsers }) {
     e.preventDefault();
     console.log("users are: " + users);
     console.log(JSON.stringify(formData));
+    console.log(process.env.REACT_APP_POSSTACK_API_KEY)
+
+    await fetch(`http://api.positionstack.com/v1/forward?access_key=${process.env.REACT_APP_POSSTACK_API_KEY}&query=${formData.address}`)
+    .then((r) => r.json())
+    .then((coords) => {
+      formData.lat = coords.data[0].latitude
+      formData.lng = coords.data[0].longitude
+    })
+    .catch((error) => {
+      console.log(error)
+    })
 
     await fetch("http://localhost:4000/users", {
       method: "POST",
@@ -34,7 +48,10 @@ function Signup({ setIsLoggedIn, users, setUsers }) {
       body: JSON.stringify(formData),
     })
       .then((r) => r.json())
-      .then((newUser) => setUsers([...users, newUser]));
+      .then((newUser) => setUsers([...users, newUser]))
+      .catch((error) => {
+        console.log(error)
+      })
 
     setLoggedInUser(formData);
 

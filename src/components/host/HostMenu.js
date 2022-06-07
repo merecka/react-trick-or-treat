@@ -26,7 +26,6 @@ function HostMenu({onUpdateUser}) {
 
   return (
     <div>
-      <h1>HELLO</h1>
       <button onClick={toggleEditMenu} style={{ visibility: toEdit ? 'hidden': 'visible'}}>Edit</button>
       <div style={{ display: toEdit ? null : 'none'}}>
         <form onSubmit={handleSubmit}>
