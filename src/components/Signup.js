@@ -167,7 +167,7 @@ function Signup({ setIsLoggedIn, users, setUsers }) {
                     </span>
                     <input
                       type="text"
-                      name="State"
+                      name="state"
                       placeholder="State"
                       value={formData.state}
                       onChange={handleChange}

@@ -8,8 +8,16 @@ import HostMenu from "./HostMenu";
 function Host({ isLoggedIn, users }) {
   const { loggedInUser, setLoggedInUser } = useContext(UserContext);
 
-  const address = loggedInUser ? loggedInUser.street + ' ' + loggedInUser.city + ', ' + loggedInUser.state + ' ' + loggedInUser.zipcode : null;
-  
+  const address = loggedInUser
+    ? loggedInUser.street +
+      " " +
+      loggedInUser.city +
+      ", " +
+      loggedInUser.state +
+      " " +
+      loggedInUser.zipcode
+    : null;
+
   if (!isLoggedIn) return <Redirect to="/login" />;
 
   function updateLoggedInUser(startDate, endDate) {
@@ -23,14 +31,20 @@ function Host({ isLoggedIn, users }) {
       },
       body: JSON.stringify({
         starttime: startDate,
-        endtime: endDate
+        endtime: endDate,
       }),
     })
       .then((r) => r.json())
-      .then(() => setLoggedInUser({...loggedInUser, starttime: startDate, endtime: endDate}))
+      .then(() =>
+        setLoggedInUser({
+          ...loggedInUser,
+          starttime: startDate,
+          endtime: endDate,
+        })
+      )
       .catch((error) => {
-        console.log(error)
-      })
+        console.log(error);
+      });
   }
 
   return (
