@@ -20,26 +20,23 @@ function Host({ isLoggedIn, users }) {
 
   if (!isLoggedIn) return <Redirect to="/login" />;
 
-  function updateLoggedInUser(startDate, endDate) {
-    console.log(new Date(startDate));
-    console.log(new Date(endDate));
-
+  function updateLoggedInUser(selectedDate) {
     fetch(`http://localhost:4000/users/${loggedInUser.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        starttime: startDate,
-        endtime: endDate,
+        starttime: selectedDate.startDate,
+        endtime: selectedDate.endDate,
       }),
     })
       .then((r) => r.json())
       .then(() =>
         setLoggedInUser({
           ...loggedInUser,
-          starttime: startDate,
-          endtime: endDate,
+          starttime: selectedDate.startDate,
+          endtime: selectedDate.endDate,
         })
       )
       .catch((error) => {

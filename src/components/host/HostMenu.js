@@ -1,35 +1,69 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import * as dayjs from 'dayjs'
+import * as dayjs from "dayjs";
 
-function HostMenu({onUpdateUser}) {
+function HostMenu({ onUpdateUser }) {
   const [startTime, setStartTime] = useState(new Date());
   const [endTime, setEndTime] = useState(new Date());
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
+  const [selectedDate, setSelectedDate] = useState({
+    startDate: null,
+    endDate: null,
+  });
   const [toEdit, setToEdit] = useState(true);
-
-  const currentYear = startTime.getFullYear();
+  const currentYear = new Date().getFullYear();
 
   function handleSubmit(event) {
     event.preventDefault();
 
+    const newStartDate = new Date(
+      currentYear,
+      9,
+      31,
+      startTime.getHours(),
+      startTime.getMinutes(),
+      0
+    );
+
+    const newEndDate = new Date(
+      currentYear,
+      9,
+      31,
+      endTime.getHours(),
+      endTime.getMinutes(),
+      0
+    );
+
+    setSelectedDate({
+      startDate: newStartDate,
+      endDate: newEndDate,
+    });
+
     // January = 0, December = 11
-    setStartDate(new Date(currentYear, 9, 31, startTime.getHours(), startTime.getMinutes(), 0));
-    setEndDate(new Date(currentYear, 9, 31, endTime.getHours(), endTime.getMinutes(), 0));
+    onUpdateUser({
+      startDate: newStartDate,
+      endDate: newEndDate,
+    });
+
     setToEdit(false);
-    onUpdateUser(startDate, endDate);
   }
 
-  function toggleEditMenu() {setToEdit(!toEdit) };
+  function toggleEditMenu() {
+    setToEdit(!toEdit);
+  }
 
   return (
     <div>
-      <button onClick={toggleEditMenu} style={{ visibility: toEdit ? 'hidden': 'visible'}}>Edit</button>
-      <div style={{ display: toEdit ? null : 'none'}}>
+      <button
+        onClick={toggleEditMenu}
+        style={{ visibility: toEdit ? "hidden" : "visible" }}
+      >
+        Edit
+      </button>
+      <div style={{ display: toEdit ? null : "none" }}>
         <form onSubmit={handleSubmit}>
-          <label>Start Time:</label><br />
+          <label>Start Time:</label>
+          <br />
           <DatePicker
             selected={startTime}
             onChange={(date) => setStartTime(date)}
@@ -39,7 +73,8 @@ function HostMenu({onUpdateUser}) {
             timeCaption="Time"
             dateFormat="h:mm aa"
           />
-          <label>End Time:</label><br />
+          <label>End Time:</label>
+          <br />
           <DatePicker
             selected={endTime}
             onChange={(date) => setEndTime(date)}
@@ -52,11 +87,12 @@ function HostMenu({onUpdateUser}) {
           <button type="submit">Save</button>
         </form>
       </div>
-      {startDate && endDate ? 
-        <div style={{ visibility: toEdit ? 'hidden': 'visible'}}>
-          <h2>Start Time:  {dayjs(startDate).format('h:mm A')}</h2>
-          <h2>End Time:  {dayjs(endDate).format('h:mm A')}</h2>
-        </div> : null}
+      {selectedDate.startDate && selectedDate.endDate ? (
+        <div style={{ visibility: toEdit ? "hidden" : "visible" }}>
+          <h2>Start Time: {dayjs(selectedDate.startDate).format("h:mm A")}</h2>
+          <h2>End Time: {dayjs(selectedDate.endDate).format("h:mm A")}</h2>
+        </div>
+      ) : null}
     </div>
   );
 }
