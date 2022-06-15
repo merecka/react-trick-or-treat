@@ -17,8 +17,8 @@ function Signup({ setIsLoggedIn, users, setUsers }) {
   const [formData, setFormData] = useState({
     name: "",
     address: "",
-    email: null,
-    password: null,
+    email: "",
+    password: "",
   });
   const [passwordsMatch, setPasswordsMatch] = useState(true);
   const { setLoggedInUser } = useContext(UserContext);
@@ -27,6 +27,8 @@ function Signup({ setIsLoggedIn, users, setUsers }) {
 
   function handleChange(e) {
     if (
+      form.elements["password"].value === "" ||
+      form.elements["password_retype"].value === "" ||
       form.elements["password"].value !== form.elements["password_retype"].value
     ) {
       setPasswordsMatch(false);
@@ -56,9 +58,7 @@ function Signup({ setIsLoggedIn, users, setUsers }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log("users are: " + users);
     console.log(JSON.stringify(formData));
-    console.log(process.env.REACT_APP_POSSTACK_API_KEY);
 
     await fetch(
       `http://api.positionstack.com/v1/forward?access_key=${process.env.REACT_APP_POSSTACK_API_KEY}&query=${formData.address}`
@@ -80,12 +80,13 @@ function Signup({ setIsLoggedIn, users, setUsers }) {
       body: JSON.stringify(formData),
     })
       .then((r) => r.json())
-      .then((newUser) => setUsers([...users, newUser]))
+      .then((newUser) => {
+        setUsers([...users, newUser]);
+        setLoggedInUser(newUser);
+      })
       .catch((error) => {
         console.log(error);
       });
-
-    setLoggedInUser(formData);
 
     setIsLoggedIn(true);
 
@@ -219,9 +220,23 @@ function Signup({ setIsLoggedIn, users, setUsers }) {
                 />
               </div>
               <div className="input_field radio_option">
-                <input type="radio" name="radiogroup1" id="rd1" required />
+                <input
+                  type="radio"
+                  name="host"
+                  id="rd1"
+                  value={false}
+                  onChange={handleChange}
+                  required
+                />
                 <label for="rd1">Non-Host</label>
-                <input type="radio" name="radiogroup1" id="rd2" required />
+                <input
+                  type="radio"
+                  name="host"
+                  id="rd2"
+                  value={true}
+                  onChange={handleChange}
+                  required
+                />
                 <label for="rd2">Host</label>
               </div>
               <button
