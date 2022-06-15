@@ -16,6 +16,7 @@ function HostMenu({ onUpdateUser }) {
   function handleSubmit(event) {
     event.preventDefault();
 
+    // January = 0, December = 11
     const newStartDate = new Date(
       currentYear,
       9,
@@ -39,7 +40,6 @@ function HostMenu({ onUpdateUser }) {
       endDate: newEndDate,
     });
 
-    // January = 0, December = 11
     onUpdateUser({
       startDate: newStartDate,
       endDate: newEndDate,
