@@ -5,6 +5,7 @@ import Login from "./components/Login";
 import { UserProvider } from "./context/user";
 import Signup from "./components/Signup";
 import Host from "./components/host/Host";
+import Viewer from "./components/visitor/Viewer";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -29,6 +30,12 @@ function App() {
             setUsers={setUsers}
             users={users}
           />
+        </Route>
+        <Route exact path="/host">
+          <Host isLoggedIn={isLoggedIn} users={users} />
+        </Route>
+        <Route exact path="/viewer">
+          <Viewer isLoggedIn={isLoggedIn} users={users} />
         </Route>
         <Route exact path="/">
           <Host isLoggedIn={isLoggedIn} users={users} />

@@ -21,7 +21,7 @@ function Signup({ setIsLoggedIn, users, setUsers }) {
     password: "",
   });
   const [passwordsMatch, setPasswordsMatch] = useState(true);
-  const { setLoggedInUser } = useContext(UserContext);
+  const { loggedInUser, setLoggedInUser } = useContext(UserContext);
   const form = document.getElementById("signup");
   const submit_button = document.getElementById("submit_button");
 
@@ -58,7 +58,6 @@ function Signup({ setIsLoggedIn, users, setUsers }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log(JSON.stringify(formData));
 
     await fetch(
       `http://api.positionstack.com/v1/forward?access_key=${process.env.REACT_APP_POSSTACK_API_KEY}&query=${formData.address}`
@@ -90,8 +89,12 @@ function Signup({ setIsLoggedIn, users, setUsers }) {
 
     setIsLoggedIn(true);
 
-    // after logging the user in, redirect to the home page!
-    history.push("/");
+    // after logging the user in, redirect to the correct page!
+    if (loggedInUser.host === true) {
+      history.push("/host");
+    } else {
+      history.push("/viewer");
+    }
   }
 
   return (

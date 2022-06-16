@@ -32,8 +32,8 @@ function Login({ setIsLoggedIn, users }) {
         setLoggedInUser(user);
         setIsLoggedIn(true);
 
-        // after logging the user in, redirect to the home page!
-        history.push("/");
+        // after logging the user in, redirect to the correct page!
+        user.host === true ? history.push("/host") : history.push("/viewer");
       } else {
         setLoginFailed(true);
       }

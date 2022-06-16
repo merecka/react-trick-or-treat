@@ -3,14 +3,12 @@ import { Redirect } from "react-router-dom";
 import { UserContext } from "../../context/user";
 import Header from "../Header";
 import Map from "../Map/Map";
-import HostMenu from "./HostMenu";
+import "../../css/Viewer.scss";
 
-function Host({ isLoggedIn, users }) {
+function Viewer({ isLoggedIn, users }) {
   const { loggedInUser, setLoggedInUser } = useContext(UserContext);
 
   if (!isLoggedIn) return <Redirect to="/login" />;
-  if (loggedInUser && loggedInUser.host === false)
-    return <Redirect to="/viewer" />;
 
   function updateLoggedInUser(selectedDate) {
     fetch(`http://localhost:4000/users/${loggedInUser.id}`, {
@@ -38,13 +36,21 @@ function Host({ isLoggedIn, users }) {
 
   return (
     <div>
-      <Header />
-      <h1>Host!</h1>
-      <Map users={users} />
-      <h2>{loggedInUser.address}</h2>
-      <HostMenu onUpdateUser={updateLoggedInUser} />
+      <div className="viewer-container">
+        <Header />
+        <h1>Visitor! {loggedInUser.address}</h1>
+        <div className="content-container">
+          <div className="top-container">
+            <div className="locations-list">Locations List</div>
+            <div className="viewer-map">
+              <Map users={users} />
+            </div>
+          </div>
+          <div className="bottom-container">Bottom Container</div>
+        </div>
+      </div>
     </div>
   );
 }
 
-export default Host;
+export default Viewer;
