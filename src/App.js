@@ -4,8 +4,8 @@ import { Route } from "react-router-dom";
 import Login from "./components/Login";
 import { UserProvider } from "./context/user";
 import Signup from "./components/Signup";
-import Host from "./components/host/Host";
-import Viewer from "./components/visitor/Viewer";
+import Host from "./components/Host/Host";
+import Viewer from "./components/Viewer/Viewer";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

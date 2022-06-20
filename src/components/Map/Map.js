@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import GoogleMapReact from "google-map-react";
-import { UsersContext } from "../../context/users";
 import Location from "./Location";
 
 function Map({ users }) {
@@ -15,7 +14,8 @@ function Map({ users }) {
   return (
     // Important! Always set the container height explicitly
     <div style={{ height: "100%", width: "100%" }}>
-      <GoogleMapReact
+      // Uncomment this code below to render the Google Map
+      {/* <GoogleMapReact
         bootstrapURLKeys={{ key: process.env.REACT_APP_GMAP_API_KEY }}
         defaultCenter={defaultProps.center}
         defaultZoom={defaultProps.zoom}
@@ -23,7 +23,7 @@ function Map({ users }) {
         {users.map((user) => (
           <Location key={user.id} user={user} lat={user.lat} lng={user.lng} />
         ))}
-      </GoogleMapReact>
+      </GoogleMapReact> */}
     </div>
   );
 }

@@ -14,6 +14,8 @@
       .locations-list {
         background-color: blue;
         border: black;
+        height: 60vh;
+        overflow-y: auto;
       }
 
       .viewer-map {
