@@ -1,12 +1,8 @@
-import React, { useContext } from "react";
-import { UserContext } from "../../context/user";
+import React from "react";
 import "../../css/LocationCard.scss";
 import * as dayjs from "dayjs";
 
 function LocationCard({ user }) {
-  console.log(user);
-  console.log(user.starttime);
-  console.log(user.endtime);
   const startTime = dayjs(user.starttime).format("h:mm A");
   const endTime = dayjs(user.endtime).format("h:mm A");
 

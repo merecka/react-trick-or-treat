@@ -7,8 +7,8 @@ import "../../css/Viewer.scss";
 import LocationsList from "./LocationsList";
 
 function Viewer({ isLoggedIn, users }) {
-  const { loggedInUser, setLoggedInUser } = useContext(UserContext);
-  const hostUsers = users.filter((user) => user.host === true);
+  const { loggedInUser } = useContext(UserContext);
+  const hostUsers = users.filter((user) => user.host === "true");
 
   if (!isLoggedIn) return <Redirect to="/login" />;
 

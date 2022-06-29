@@ -59,6 +59,11 @@ function Signup({ setIsLoggedIn, users, setUsers }) {
   async function handleSubmit(e) {
     e.preventDefault();
 
+    setFormData({
+      ...formData,
+      host: formData.host === "true" ? true : false,
+    });
+
     await fetch(
       `http://api.positionstack.com/v1/forward?access_key=${process.env.REACT_APP_POSSTACK_API_KEY}&query=${formData.address}`
     )
@@ -227,7 +232,7 @@ function Signup({ setIsLoggedIn, users, setUsers }) {
                   type="radio"
                   name="host"
                   id="rd1"
-                  value={false}
+                  value="false"
                   onChange={handleChange}
                   required
                 />
@@ -236,7 +241,7 @@ function Signup({ setIsLoggedIn, users, setUsers }) {
                   type="radio"
                   name="host"
                   id="rd2"
-                  value={true}
+                  value="true"
                   onChange={handleChange}
                   required
                 />

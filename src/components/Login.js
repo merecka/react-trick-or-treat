@@ -24,7 +24,7 @@ function Login({ setIsLoggedIn, users }) {
   function handleSubmit(e) {
     e.preventDefault();
 
-    users.find((user) => {
+    users.forEach((user) => {
       if (
         user.name.toLowerCase() === formData.username.toLowerCase() &&
         user.password.toLowerCase() === formData.password.toLowerCase()

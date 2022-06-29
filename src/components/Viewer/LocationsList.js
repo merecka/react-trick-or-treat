@@ -1,13 +1,8 @@
-import React, { useContext } from "react";
-import { UserContext } from "../../context/user";
+import React from "react";
 import "../../css/Viewer.scss";
 import LocationCard from "./LocationCard";
 
 function LocationsList({ users }) {
-  const { loggedInUser } = useContext(UserContext);
-
-  console.log("users in LocationsList are: " + JSON.stringify(users));
-
   return (
     <div className="hosts-container">
       List of Locations
