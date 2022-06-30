@@ -10,10 +10,6 @@ function LocationCard({ user }) {
   const startTime = dayjs(user.starttime).format("h:mm A");
   const endTime = dayjs(user.endtime).format("h:mm A");
 
-  console.log("Rendering Location Card");
-  console.log(loggedInUser.savedlocations.length);
-  console.log(loggedInUser.savedlocations.includes(user.id));
-
   const saveRemoveButton = loggedInUser.savedlocations.includes(user.id) ? (
     <RemoveButton user={user} />
   ) : (
