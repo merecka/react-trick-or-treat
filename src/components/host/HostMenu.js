@@ -3,15 +3,21 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import * as dayjs from "dayjs";
 
-function HostMenu({ onUpdateUser }) {
+function HostMenu({ onUpdateUser, loggedInUser }) {
   const [startTime, setStartTime] = useState(new Date());
   const [endTime, setEndTime] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState({
     startDate: null,
     endDate: null,
   });
-  const [toEdit, setToEdit] = useState(true);
+  const [toEdit, setToEdit] = useState(false);
   const currentYear = new Date().getFullYear();
+
+  useEffect(() => {
+    loggedInUser.starttime !== null && loggedInUser.endtime !== null
+      ? setToEdit(false)
+      : setToEdit(true);
+  }, []);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -87,12 +93,6 @@ function HostMenu({ onUpdateUser }) {
           <button type="submit">Save</button>
         </form>
       </div>
-      {selectedDate.startDate && selectedDate.endDate ? (
-        <div style={{ visibility: toEdit ? "hidden" : "visible" }}>
-          <h2>Start Time: {dayjs(selectedDate.startDate).format("h:mm A")}</h2>
-          <h2>End Time: {dayjs(selectedDate.endDate).format("h:mm A")}</h2>
-        </div>
-      ) : null}
     </div>
   );
 }
