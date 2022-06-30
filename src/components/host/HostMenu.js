@@ -6,11 +6,7 @@ import * as dayjs from "dayjs";
 function HostMenu({ onUpdateUser, loggedInUser }) {
   const [startTime, setStartTime] = useState(new Date());
   const [endTime, setEndTime] = useState(new Date());
-  const [selectedDate, setSelectedDate] = useState({
-    startDate: null,
-    endDate: null,
-  });
-  const [toEdit, setToEdit] = useState(false);
+  const [toEdit, setToEdit] = useState();
   const currentYear = new Date().getFullYear();
 
   useEffect(() => {
@@ -40,11 +36,6 @@ function HostMenu({ onUpdateUser, loggedInUser }) {
       endTime.getMinutes(),
       0
     );
-
-    setSelectedDate({
-      startDate: newStartDate,
-      endDate: newEndDate,
-    });
 
     onUpdateUser({
       startDate: newStartDate,

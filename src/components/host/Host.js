@@ -54,7 +54,6 @@ function Host({ isLoggedIn, users }) {
         <h2>Start Time: {dayjs(loggedInUser.starttime).format("h:mm A")}</h2>
         <h2>End Time: {dayjs(loggedInUser.endtime).format("h:mm A")}</h2>
       </div>
-
       <HostMenu onUpdateUser={updateLoggedInUser} loggedInUser={loggedInUser} />
     </div>
   );
