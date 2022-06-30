@@ -1,5 +1,5 @@
 import React from "react";
-import "../../css/Viewer.scss";
+import "../../../css/Viewer.scss";
 import LocationCard from "./LocationCard";
 
 function LocationsList({ users }) {

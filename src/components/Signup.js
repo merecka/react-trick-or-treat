@@ -53,6 +53,7 @@ function Signup({ setIsLoggedIn, users, setUsers }) {
       lng: null,
       starttime: null,
       endtime: null,
+      savedlocations: [],
     });
   }
 

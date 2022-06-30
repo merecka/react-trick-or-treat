@@ -1,10 +1,20 @@
-import React from "react";
-import "../../css/LocationCard.scss";
+import React, { useContext } from "react";
+import "../../../css/LocationCard.scss";
 import * as dayjs from "dayjs";
+import { UserContext } from "../../../context/user";
+import RemoveButton from "./RemoveButton";
+import SaveButton from "./SaveButton";
 
 function LocationCard({ user }) {
+  const { loggedInUser } = useContext(UserContext);
   const startTime = dayjs(user.starttime).format("h:mm A");
   const endTime = dayjs(user.endtime).format("h:mm A");
+
+  const saveRemoveButton = loggedInUser.savedlocations[user.id] ? (
+    <RemoveButton user={user} />
+  ) : (
+    <SaveButton user={user} />
+  );
 
   return (
     <div className="card-container">
@@ -19,7 +29,7 @@ function LocationCard({ user }) {
         <p>Start Time: {startTime}</p>
         <p>End Time: {endTime}</p>
       </div>
-      <div className="save-remove">Save / Remove</div>
+      {saveRemoveButton}
     </div>
   );
 }
