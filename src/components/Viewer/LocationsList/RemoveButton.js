@@ -24,6 +24,16 @@ function RemoveButton({ user }) {
     });
 
     setUsers(newUsersArray);
+
+    fetch(`http://localhost:4000/users/${loggedInUser.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ savedlocations: updatedUser.savedlocations }),
+    }).catch((error) => {
+      console.log(error);
+    });
   }
 
   return (

@@ -13,12 +13,8 @@ function SaveButton({ user }) {
   //   });
 
   function handleSave() {
-    console.log(loggedInUser);
-    console.log(user.id);
-
     let updatedUser = loggedInUser;
     updatedUser.savedlocations.push(user.id);
-    console.log(updatedUser);
 
     setLoggedInUser(updatedUser);
     const newUsersArray = users.map((user) => {
@@ -30,6 +26,16 @@ function SaveButton({ user }) {
     });
 
     setUsers(newUsersArray);
+
+    fetch(`http://localhost:4000/users/${loggedInUser.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ savedlocations: updatedUser.savedlocations }),
+    }).catch((error) => {
+      console.log(error);
+    });
   }
 
   return (
