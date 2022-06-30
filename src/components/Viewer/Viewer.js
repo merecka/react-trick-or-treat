@@ -4,7 +4,7 @@ import { UserContext } from "../../context/user";
 import Header from "../Header";
 import Map from "../Map/Map";
 import "../../css/Viewer.scss";
-import LocationsList from "./LocationsList";
+import LocationsList from "./LocationsList/LocationsList";
 
 function Viewer({ isLoggedIn, users }) {
   const { loggedInUser } = useContext(UserContext);

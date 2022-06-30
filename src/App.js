@@ -1,22 +1,16 @@
 import "./App.css";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Route } from "react-router-dom";
 import Login from "./components/Login";
 import { UserProvider } from "./context/user";
 import Signup from "./components/Signup";
 import Host from "./components/Host/Host";
 import Viewer from "./components/Viewer/Viewer";
+import { UsersContext } from "./context/users";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [users, setUsers] = useState();
-
-  useEffect(() => {
-    fetch("http://localhost:4000/users")
-      .then((r) => r.json())
-      .then((users) => setUsers(users));
-    console.log("current users are: " + JSON.stringify(users));
-  }, [isLoggedIn]);
+  const { users, setUsers } = useContext(UsersContext);
 
   return (
     <div className="App">
