@@ -11,8 +11,8 @@ function SavedLocations({ users }) {
   );
   const savedUsersTableData = savedUsers.map((user, index) => {
     return (
-      <tr>
-        <td>{index}</td>
+      <tr key={index}>
+        <td>{index + 1}</td>
         <td>{user.name}</td>
         <td>{user.address}</td>
         <td>{dayjs(user.starttime).format("h:mm A")}</td>
@@ -26,7 +26,7 @@ function SavedLocations({ users }) {
       <table>
         <thead>
           <tr>
-            <th>Number</th>
+            <th></th>
             <th>Name</th>
             <th>Address</th>
             <th>Start Time</th>
