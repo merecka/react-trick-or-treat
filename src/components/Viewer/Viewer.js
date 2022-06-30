@@ -5,6 +5,7 @@ import Header from "../Header";
 import Map from "../Map/Map";
 import "../../css/Viewer.scss";
 import LocationsList from "./LocationsList/LocationsList";
+import SavedLocations from "./SavedLocations/SavedLocations";
 
 function Viewer({ isLoggedIn, users }) {
   const { loggedInUser } = useContext(UserContext);
@@ -26,7 +27,10 @@ function Viewer({ isLoggedIn, users }) {
               <Map users={hostUsers} />
             </div>
           </div>
-          <div className="bottom-container">Bottom Container</div>
+          <div className="bottom-container">
+            Saved Locations
+            <SavedLocations users={users} />
+          </div>
         </div>
       </div>
     </div>

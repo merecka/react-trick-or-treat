@@ -1,53 +1,39 @@
 import React, { useContext } from "react";
-import "../../../css/LocationCard.scss";
+import "../../../css/SavedLocations.scss";
 import * as dayjs from "dayjs";
 import { UserContext } from "../../../context/user";
-import RemoveButton from "./RemoveButton";
-import SaveButton from "./SaveButton";
 
 function SavedLocations({ users }) {
   const { loggedInUser } = useContext(UserContext);
 
+  const savedUsers = users.filter((user) =>
+    loggedInUser.savedlocations.includes(user.id)
+  );
+  const savedUsersTableData = savedUsers.map((user, index) => {
+    return (
+      <tr>
+        <td>{index}</td>
+        <td>{user.name}</td>
+        <td>{user.address}</td>
+        <td>{dayjs(user.starttime).format("h:mm A")}</td>
+        <td>{dayjs(user.endtime).format("h:mm A")}</td>
+      </tr>
+    );
+  });
+
   return (
     <div className="saved-locations-table">
       <table>
-        <tr>
-          <th>Number</th>
-          <th>Name</th>
-          <th>Address</th>
-          <th>Start Time</th>
-          <th>End Time</th>
-        </tr>
-        <tr>
-          <td>Alfreds Futterkiste</td>
-          <td>Maria Anders</td>
-          <td>Germany</td>
-        </tr>
-        <tr>
-          <td>Centro comercial Moctezuma</td>
-          <td>Francisco Chang</td>
-          <td>Mexico</td>
-        </tr>
-        <tr>
-          <td>Ernst Handel</td>
-          <td>Roland Mendel</td>
-          <td>Austria</td>
-        </tr>
-        <tr>
-          <td>Island Trading</td>
-          <td>Helen Bennett</td>
-          <td>UK</td>
-        </tr>
-        <tr>
-          <td>Laughing Bacchus Winecellars</td>
-          <td>Yoshi Tannamuri</td>
-          <td>Canada</td>
-        </tr>
-        <tr>
-          <td>Magazzini Alimentari Riuniti</td>
-          <td>Giovanni Rovelli</td>
-          <td>Italy</td>
-        </tr>
+        <thead>
+          <tr>
+            <th>Number</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+          </tr>
+        </thead>
+        <tbody>{savedUsersTableData}</tbody>
       </table>
     </div>
   );
