@@ -5,8 +5,6 @@ import "../css/Header.css";
 function Header() {
   const { loggedInUser } = useContext(UserContext);
 
-  console.log(loggedInUser);
-
   return (
     <div className="mainHeader">
       <div>

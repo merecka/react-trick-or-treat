@@ -7,8 +7,6 @@ import "../../css/Viewer.scss";
 import LocationsList from "./LocationsList/LocationsList";
 
 function Viewer({ isLoggedIn, users }) {
-  console.log("Users in Viewer are: " + users);
-  console.log("users.length is " + users.length);
   const { loggedInUser } = useContext(UserContext);
   const hostUsers = users.filter((user) => user.host === "true");
 

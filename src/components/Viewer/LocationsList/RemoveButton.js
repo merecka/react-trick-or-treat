@@ -7,12 +7,23 @@ function RemoveButton({ user }) {
   const { users, setUsers } = useContext(UsersContext);
 
   function handleRemove() {
-    let newSavedLocations = loggedInUser.savedLocations.filter(
+    let newSavedLocations = loggedInUser.savedlocations.filter(
       (userId) => userId !== user.id
     );
-    setLoggedInUser(...loggedInUser, { savedlocations: newSavedLocations });
 
-    setUsers(...users, (users[users.id].savedlocations = newSavedLocations));
+    let updatedUser = loggedInUser;
+    updatedUser.savedlocations = newSavedLocations;
+    setLoggedInUser(updatedUser);
+
+    const newUsersArray = users.map((user) => {
+      if (user.id === loggedInUser.id) {
+        return updatedUser;
+      } else {
+        return user;
+      }
+    });
+
+    setUsers(newUsersArray);
   }
 
   return (
