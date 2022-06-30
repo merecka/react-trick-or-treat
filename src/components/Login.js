@@ -33,7 +33,7 @@ function Login({ setIsLoggedIn, users }) {
         setIsLoggedIn(true);
 
         // after logging the user in, redirect to the correct page!
-        user.host === true ? history.push("/host") : history.push("/viewer");
+        user.host === "true" ? history.push("/host") : history.push("/viewer");
       } else {
         setLoginFailed(true);
       }

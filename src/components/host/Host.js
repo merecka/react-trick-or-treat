@@ -4,6 +4,7 @@ import { UserContext } from "../../context/user";
 import Header from "../Header";
 import Map from "../Map/Map";
 import HostMenu from "./HostMenu";
+import * as dayjs from "dayjs";
 
 function Host({ isLoggedIn, users }) {
   const { loggedInUser, setLoggedInUser } = useContext(UserContext);
@@ -42,7 +43,18 @@ function Host({ isLoggedIn, users }) {
       <h1>Host!</h1>
       <Map users={users} />
       <h2>{loggedInUser.address}</h2>
-      <HostMenu onUpdateUser={updateLoggedInUser} />
+      <div
+        style={{
+          visibility:
+            loggedInUser.startDate && loggedInUser.endDate
+              ? "hidden"
+              : "visible",
+        }}
+      >
+        <h2>Start Time: {dayjs(loggedInUser.starttime).format("h:mm A")}</h2>
+        <h2>End Time: {dayjs(loggedInUser.endtime).format("h:mm A")}</h2>
+      </div>
+      <HostMenu onUpdateUser={updateLoggedInUser} loggedInUser={loggedInUser} />
     </div>
   );
 }
