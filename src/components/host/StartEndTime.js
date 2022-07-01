@@ -3,7 +3,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import * as dayjs from "dayjs";
 
-function HostMenu({ onUpdateUser, loggedInUser }) {
+function StartEndTime({ onUpdateUserTime, loggedInUser }) {
   const [startTime, setStartTime] = useState(new Date());
   const [endTime, setEndTime] = useState(new Date());
   const [toEdit, setToEdit] = useState();
@@ -37,7 +37,7 @@ function HostMenu({ onUpdateUser, loggedInUser }) {
       0
     );
 
-    onUpdateUser({
+    onUpdateUserTime({
       startDate: newStartDate,
       endDate: newEndDate,
     });
@@ -51,6 +51,17 @@ function HostMenu({ onUpdateUser, loggedInUser }) {
 
   return (
     <div>
+      <div
+        style={{
+          visibility:
+            loggedInUser.startDate && loggedInUser.endDate
+              ? "hidden"
+              : "visible",
+        }}
+      >
+        <h2>Start Time: {dayjs(loggedInUser.starttime).format("h:mm A")}</h2>
+        <h2>End Time: {dayjs(loggedInUser.endtime).format("h:mm A")}</h2>
+      </div>
       <button
         onClick={toggleEditMenu}
         style={{ visibility: toEdit ? "hidden" : "visible" }}
@@ -88,4 +99,4 @@ function HostMenu({ onUpdateUser, loggedInUser }) {
   );
 }
 
-export default HostMenu;
+export default StartEndTime;
