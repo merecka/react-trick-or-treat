@@ -5,9 +5,11 @@ import Header from "../Header";
 import Map from "../Map/Map";
 import HostComments from "./HostComments";
 import StartEndTime from "./StartEndTime";
+import "../../css/Host.scss";
 
 function Host({ isLoggedIn, users }) {
   const { loggedInUser, setLoggedInUser } = useContext(UserContext);
+  const hostUsers = users.filter((user) => user.host === "true");
 
   if (!isLoggedIn) return <Redirect to="/login" />;
   if (loggedInUser && loggedInUser.host === false)
@@ -60,19 +62,25 @@ function Host({ isLoggedIn, users }) {
   }
 
   return (
-    <div>
-      <Header />
-      <h1>Host!</h1>
-      <Map users={users} />
-      <h2>{loggedInUser.address}</h2>
-      <StartEndTime
-        onUpdateUser={updateLoggedInUserTime}
-        loggedInUser={loggedInUser}
-      />
-      <HostComments
-        loggedInUser={loggedInUser}
-        onUpdateUserComment={updateLoggedInUserComment}
-      />
+    <div className="host-container">
+      <div className="top-container">
+        <Header />
+        <h1>Host!</h1>
+        <h2>{loggedInUser.address}</h2>
+        <div className="viewer-map">
+          <Map users={hostUsers} />
+        </div>
+      </div>
+      <div className="bottom-container">
+        <StartEndTime
+          onUpdateUser={updateLoggedInUserTime}
+          loggedInUser={loggedInUser}
+        />
+        <HostComments
+          loggedInUser={loggedInUser}
+          onUpdateUserComment={updateLoggedInUserComment}
+        />
+      </div>
     </div>
   );
 }

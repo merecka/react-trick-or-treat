@@ -4,7 +4,22 @@
   box-sizing: border-box;
 }
 
-.viewer-map {
-  background-color: yellow;
-  height: 60vh;
+.host-container {
+  height: 100vh;
+
+  .top-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    height: 60%;
+
+    .viewer-map {
+      background-color: yellow;
+      height: 60vh;
+    }
+  }
+
+  .bottom-container {
+    grid-template-columns: 1fr;
+    height: 40%;
+  }
 }

@@ -14,23 +14,21 @@ function Viewer({ isLoggedIn, users }) {
   if (!isLoggedIn) return <Redirect to="/login" />;
 
   return (
-    <div>
-      <div className="viewer-container">
-        <Header />
-        <h1>Visitor! {loggedInUser.address}</h1>
-        <div className="content-container">
-          <div className="top-container">
-            <div className="locations-list">
-              <LocationsList users={hostUsers} />
-            </div>
-            <div className="viewer-map">
-              <Map users={hostUsers} />
-            </div>
+    <div className="viewer-container">
+      <Header />
+      <h1>Visitor! {loggedInUser.address}</h1>
+      <div className="content-container">
+        <div className="top-container">
+          <div className="locations-list">
+            <LocationsList users={hostUsers} />
           </div>
-          <div className="bottom-container">
-            Saved Locations
-            <SavedLocations users={users} />
+          <div className="viewer-map">
+            <Map users={hostUsers} />
           </div>
+        </div>
+        <div className="bottom-container">
+          Saved Locations
+          <SavedLocations users={users} />
         </div>
       </div>
     </div>
