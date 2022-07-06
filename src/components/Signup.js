@@ -54,6 +54,7 @@ function Signup({ setIsLoggedIn, users, setUsers }) {
       starttime: null,
       endtime: null,
       savedlocations: [],
+      comments: null,
     });
   }
 

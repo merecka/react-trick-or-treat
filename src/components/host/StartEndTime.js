@@ -3,17 +3,19 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import * as dayjs from "dayjs";
 
-function HostMenu({ onUpdateUser, loggedInUser }) {
+function StartEndTime({ onUpdateUserTime, loggedInUser }) {
   const [startTime, setStartTime] = useState(new Date());
   const [endTime, setEndTime] = useState(new Date());
-  const [toEdit, setToEdit] = useState();
+  const [toEdit, setToEdit] = useState(false);
   const currentYear = new Date().getFullYear();
 
   useEffect(() => {
-    loggedInUser.starttime !== null && loggedInUser.endtime !== null
-      ? setToEdit(false)
-      : setToEdit(true);
-  }, []);
+    if (loggedInUser.starttime != null && loggedInUser.endtime != null) {
+      setToEdit(false);
+    } else {
+      setToEdit(true);
+    }
+  }, [loggedInUser.starttime, loggedInUser.endtime]);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -37,7 +39,7 @@ function HostMenu({ onUpdateUser, loggedInUser }) {
       0
     );
 
-    onUpdateUser({
+    onUpdateUserTime({
       startDate: newStartDate,
       endDate: newEndDate,
     });
@@ -46,18 +48,35 @@ function HostMenu({ onUpdateUser, loggedInUser }) {
   }
 
   function toggleEditMenu() {
-    setToEdit(!toEdit);
+    setToEdit((toEdit) => !toEdit);
   }
 
   return (
     <div>
-      <button
-        onClick={toggleEditMenu}
-        style={{ visibility: toEdit ? "hidden" : "visible" }}
+      <div
+        style={{
+          display:
+            loggedInUser.starttime && loggedInUser.endtime && toEdit === false
+              ? null
+              : "none",
+        }}
       >
-        Edit
-      </button>
-      <div style={{ display: toEdit ? null : "none" }}>
+        <h2>Start Time: {dayjs(loggedInUser.starttime).format("h:mm A")}</h2>
+        <h2>End Time: {dayjs(loggedInUser.endtime).format("h:mm A")}</h2>
+        <button
+          onClick={toggleEditMenu}
+          style={{ display: toEdit ? "none" : null }}
+        >
+          Edit
+        </button>
+      </div>
+
+      <div
+        className="edit-time-form"
+        style={{
+          display: toEdit === true ? null : "none",
+        }}
+      >
         <form onSubmit={handleSubmit}>
           <label>Start Time:</label>
           <br />
@@ -88,4 +107,4 @@ function HostMenu({ onUpdateUser, loggedInUser }) {
   );
 }
 
-export default HostMenu;
+export default StartEndTime;

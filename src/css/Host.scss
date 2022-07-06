@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.host-container {
+  height: 100vh;
+
+  .top-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    // height: 60%;
+
+    .viewer-map {
+      background-color: yellow;
+      height: 50vh;
+    }
+  }
+
+  .bottom-container {
+    grid-template-columns: 1fr;
+    height: 40%;
+  }
+}

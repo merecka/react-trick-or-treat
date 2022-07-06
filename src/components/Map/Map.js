@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import GoogleMapReact from "google-map-react";
 import Location from "./Location";
 
@@ -14,7 +14,7 @@ function Map({ users }) {
   return (
     // Important! Always set the container height explicitly
     <div style={{ height: "100%", width: "100%" }}>
-      // Uncomment this code below to render the Google Map
+      {/* // Uncomment this code below to render the Google Map */}
       {/* <GoogleMapReact
         bootstrapURLKeys={{ key: process.env.REACT_APP_GMAP_API_KEY }}
         defaultCenter={defaultProps.center}
