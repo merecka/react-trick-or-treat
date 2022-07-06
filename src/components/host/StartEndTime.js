@@ -15,7 +15,7 @@ function StartEndTime({ onUpdateUserTime, loggedInUser }) {
     } else {
       setToEdit(true);
     }
-  }, []);
+  }, [loggedInUser.starttime, loggedInUser.endtime]);
 
   function handleSubmit(event) {
     event.preventDefault();
