@@ -15,7 +15,7 @@ function Map({ users }) {
     // Important! Always set the container height explicitly
     <div style={{ height: "100%", width: "100%" }}>
       {/* // Uncomment this code below to render the Google Map */}
-      <GoogleMapReact
+      {/* <GoogleMapReact
         bootstrapURLKeys={{ key: process.env.REACT_APP_GMAP_API_KEY }}
         defaultCenter={defaultProps.center}
         defaultZoom={defaultProps.zoom}
@@ -23,7 +23,7 @@ function Map({ users }) {
         {users.map((user) => (
           <Location key={user.id} user={user} lat={user.lat} lng={user.lng} />
         ))}
-      </GoogleMapReact>
+      </GoogleMapReact> */}
     </div>
   );
 }
