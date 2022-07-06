@@ -73,7 +73,7 @@ function Host({ isLoggedIn, users }) {
       </div>
       <div className="bottom-container">
         <StartEndTime
-          onUpdateUser={updateLoggedInUserTime}
+          onUpdateUserTime={updateLoggedInUserTime}
           loggedInUser={loggedInUser}
         />
         <HostComments

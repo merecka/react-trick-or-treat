@@ -10,11 +10,11 @@
   .top-container {
     display: grid;
     grid-template-columns: 1fr;
-    height: 60%;
+    // height: 60%;
 
     .viewer-map {
       background-color: yellow;
-      height: 60vh;
+      height: 50vh;
     }
   }
 

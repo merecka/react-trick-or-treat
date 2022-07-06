@@ -6,13 +6,15 @@ import * as dayjs from "dayjs";
 function StartEndTime({ onUpdateUserTime, loggedInUser }) {
   const [startTime, setStartTime] = useState(new Date());
   const [endTime, setEndTime] = useState(new Date());
-  const [toEdit, setToEdit] = useState();
+  const [toEdit, setToEdit] = useState(false);
   const currentYear = new Date().getFullYear();
 
   useEffect(() => {
-    loggedInUser.starttime !== null && loggedInUser.endtime !== null
-      ? setToEdit(false)
-      : setToEdit(true);
+    if (loggedInUser.starttime != null && loggedInUser.endtime != null) {
+      setToEdit(false);
+    } else {
+      setToEdit(true);
+    }
   }, []);
 
   function handleSubmit(event) {
@@ -46,29 +48,35 @@ function StartEndTime({ onUpdateUserTime, loggedInUser }) {
   }
 
   function toggleEditMenu() {
-    setToEdit(!toEdit);
+    setToEdit((toEdit) => !toEdit);
   }
 
   return (
     <div>
       <div
         style={{
-          visibility:
-            loggedInUser.startDate && loggedInUser.endDate
-              ? "hidden"
-              : "visible",
+          display:
+            loggedInUser.starttime && loggedInUser.endtime && toEdit === false
+              ? null
+              : "none",
         }}
       >
         <h2>Start Time: {dayjs(loggedInUser.starttime).format("h:mm A")}</h2>
         <h2>End Time: {dayjs(loggedInUser.endtime).format("h:mm A")}</h2>
+        <button
+          onClick={toggleEditMenu}
+          style={{ display: toEdit ? "none" : null }}
+        >
+          Edit
+        </button>
       </div>
-      <button
-        onClick={toggleEditMenu}
-        style={{ visibility: toEdit ? "hidden" : "visible" }}
+
+      <div
+        className="edit-time-form"
+        style={{
+          display: toEdit === true ? null : "none",
+        }}
       >
-        Edit
-      </button>
-      <div style={{ display: toEdit ? null : "none" }}>
         <form onSubmit={handleSubmit}>
           <label>Start Time:</label>
           <br />
