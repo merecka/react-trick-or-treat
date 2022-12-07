@@ -8,8 +8,6 @@ function StartEndTime({ onUpdateUserTime, loggedInUser }) {
   const [endTime, setEndTime] = useState(new Date());
   const [toEdit, setToEdit] = useState(false);
   const currentYear = new Date().getFullYear();
-  const [originalStartTime, setOriginalStartTime] = useState();
-  const [originalEndTime, setOriginalEndTime] = useState();
 
   useEffect(() => {
     if (loggedInUser.starttime != null && loggedInUser.endtime != null) {
