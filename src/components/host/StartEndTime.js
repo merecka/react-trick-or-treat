@@ -51,6 +51,12 @@ function StartEndTime({ onUpdateUserTime, loggedInUser }) {
     setToEdit((toEdit) => !toEdit);
   }
 
+  function handleEditTimeCancel() {
+    toggleEditMenu();
+    setStartTime(new Date(loggedInUser.starttime));
+    setEndTime(new Date(loggedInUser.endtime));
+  }
+
   return (
     <div>
       <div
@@ -101,6 +107,7 @@ function StartEndTime({ onUpdateUserTime, loggedInUser }) {
             dateFormat="h:mm aa"
           />
           <button type="submit">Save</button>
+          <button onClick={handleEditTimeCancel}>Cancel</button>
         </form>
       </div>
     </div>
