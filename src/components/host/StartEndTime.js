@@ -8,6 +8,8 @@ function StartEndTime({ onUpdateUserTime, loggedInUser }) {
   const [endTime, setEndTime] = useState(new Date());
   const [toEdit, setToEdit] = useState(false);
   const currentYear = new Date().getFullYear();
+  const [originalStartTime, setOriginalStartTime] = useState();
+  const [originalEndTime, setOriginalEndTime] = useState();
 
   useEffect(() => {
     if (loggedInUser.starttime != null && loggedInUser.endtime != null) {
@@ -49,6 +51,12 @@ function StartEndTime({ onUpdateUserTime, loggedInUser }) {
 
   function toggleEditMenu() {
     setToEdit((toEdit) => !toEdit);
+  }
+
+  function handleEditTimeCancel() {
+    toggleEditMenu();
+    setStartTime(new Date(loggedInUser.starttime));
+    setEndTime(new Date(loggedInUser.endtime));
   }
 
   return (
@@ -101,6 +109,7 @@ function StartEndTime({ onUpdateUserTime, loggedInUser }) {
             dateFormat="h:mm aa"
           />
           <button type="submit">Save</button>
+          <button onClick={handleEditTimeCancel}>Cancel</button>
         </form>
       </div>
     </div>

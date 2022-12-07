@@ -8,6 +8,11 @@ function HostComments({ onUpdateUserComment, loggedInUser }) {
     setComment(event.target.value);
   }
 
+  function handleCancel() {
+    toggleEditMenu();
+    setComment(loggedInUser.comment);
+  }
+
   function handleSubmit(event) {
     event.preventDefault();
 
@@ -50,6 +55,7 @@ function HostComments({ onUpdateUserComment, loggedInUser }) {
             {" "}
           </textarea>
           <button type="submit">Save</button>
+          <button onClick={handleCancel}>Cancel</button>
         </form>
       </div>
     </div>
