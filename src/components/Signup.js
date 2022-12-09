@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { UserContext } from "../context/user";
 import "../css/Signup.scss";
@@ -13,17 +13,29 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 function Signup({ setIsLoggedIn, users, setUsers }) {
-  const history = useHistory();
   const [formData, setFormData] = useState({
     name: "",
     address: "",
     email: "",
     password: "",
+    host: "",
   });
   const [passwordsMatch, setPasswordsMatch] = useState(true);
   const { loggedInUser, setLoggedInUser } = useContext(UserContext);
   const form = document.getElementById("signup");
   const submit_button = document.getElementById("submit_button");
+  const history = useHistory();
+
+  useEffect(() => {
+    // after logging the user in, redirect to the correct page!
+    if (loggedInUser !== null) {
+      if (loggedInUser.host === "true") {
+        history.push("/host");
+      } else {
+        history.push("/viewer");
+      }
+    }
+  }, [loggedInUser]);
 
   function handleChange(e) {
     if (
@@ -67,7 +79,8 @@ function Signup({ setIsLoggedIn, users, setUsers }) {
     });
 
     await fetch(
-      `http://api.positionstack.com/v1/forward?access_key=${process.env.REACT_APP_POSSTACK_API_KEY}&query=${formData.address}`
+      `http://api.positionstack.com/v1/forward?access_key=${process.env.REACT_APP_POSSTACK_API_KEY}&query=${formData.address}`,
+      { referrerPolicy: "unsafe-url" }
     )
       .then((r) => r.json())
       .then((coords) => {
@@ -78,7 +91,7 @@ function Signup({ setIsLoggedIn, users, setUsers }) {
         console.log(error);
       });
 
-    await fetch("http://localhost:4000/users", {
+    await fetch(`${process.env.REACT_APP_API_URL}/users`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -88,20 +101,12 @@ function Signup({ setIsLoggedIn, users, setUsers }) {
       .then((r) => r.json())
       .then((newUser) => {
         setUsers([...users, newUser]);
+        setIsLoggedIn(true);
         setLoggedInUser(newUser);
       })
       .catch((error) => {
         console.log(error);
       });
-
-    setIsLoggedIn(true);
-
-    // after logging the user in, redirect to the correct page!
-    if (loggedInUser.host === true) {
-      history.push("/host");
-    } else {
-      history.push("/viewer");
-    }
   }
 
   return (
