@@ -9,13 +9,13 @@ function Header() {
     <div className="mainHeader">
       <div>
         {loggedInUser.name}{" "}
-        {loggedInUser.host === true ? (
+        {loggedInUser.host === "true" ? (
           <span>(host)</span>
         ) : (
           <span>(viewer)</span>
         )}
       </div>
-      <div>Logout</div>
+      <a href="/login">Logout</a>
     </div>
   );
 }

@@ -12,7 +12,7 @@ function Host({ isLoggedIn, users }) {
   const hostUsers = users.filter((user) => user.host === "true");
 
   if (!isLoggedIn) return <Redirect to="/login" />;
-  if (loggedInUser && loggedInUser.host === false)
+  if (loggedInUser && loggedInUser.host === "false")
     return <Redirect to="/viewer" />;
 
   function updateLoggedInUserTime(selectedDate) {
