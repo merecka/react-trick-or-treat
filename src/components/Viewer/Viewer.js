@@ -11,7 +11,7 @@ function Viewer({ isLoggedIn, users }) {
   const { loggedInUser } = useContext(UserContext);
   const hostUsers = users.filter((user) => user.host === "true");
 
-  if (!isLoggedIn) return <Redirect to="/login" />;
+  if (isLoggedIn === false) return <Redirect to="/login" />;
 
   return (
     <div className="viewer-container">
