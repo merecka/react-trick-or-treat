@@ -16,16 +16,19 @@ function Host({ isLoggedIn, users }) {
     return <Redirect to="/viewer" />;
 
   function updateLoggedInUserTime(selectedDate) {
-    fetch(`http://localhost:4000/users/${loggedInUser.id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        starttime: selectedDate.startDate,
-        endtime: selectedDate.endDate,
-      }),
-    })
+    fetch(
+      `${process.env.REACT_APP_POSSTACK_API_KEY}/users/${loggedInUser.id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          starttime: selectedDate.startDate,
+          endtime: selectedDate.endDate,
+        }),
+      }
+    )
       .then((r) => r.json())
       .then(() =>
         setLoggedInUser({
@@ -40,15 +43,18 @@ function Host({ isLoggedIn, users }) {
   }
 
   function updateLoggedInUserComment(newComment) {
-    fetch(`http://localhost:4000/users/${loggedInUser.id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        comment: newComment,
-      }),
-    })
+    fetch(
+      `${process.env.REACT_APP_POSSTACK_API_KEY}/users/${loggedInUser.id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          comment: newComment,
+        }),
+      }
+    )
       .then((r) => r.json())
       .then(() =>
         setLoggedInUser({
