@@ -1,3 +1,23 @@
+Trick or Treat App
+
+Description:
+This is a web application built using React and JSON-Server. The purpose of this application is to allow users to host and find available trick or treating locations for Halloween! Users can sign up with an address and either host or find available nearby locations that are hosting trick or treating. I was inspired to make this while trick or treating with my son on Halloween in 2021.
+
+Installation:
+This project can be run locally with NPM using 'npm start' in both the json-server-template folder and the trick-or-treat folder. To have full fuctionality of the application it will require API keys for Google Map API and Position Stack. Both have free tiered memberships (as of January 2023) and will provide you with an API key that you can use. You will need to create a .env file with the following environmental variables:
+
+REACT_APP_GMAP_API_KEY=your assigned API key from Google Map API
+REACT_APP_POSSTACK_API_KEY=your assigned API key from Position Stack API
+REACT_APP_API_URL=http://localhost:4000
+
+With this in place, you should be able to run 'npm install' followed by 'npm start' in both the json-server-template folder and the trick-or-treat folders.
+
+Author:
+This application was built by myself, Alex Merecka, and is for personal use only.
+
+License:
+This application is licensed for personal (non-commercial) usage only. This is not an open source project and therefore the source code is proprietary to the author, Alex Merecka.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
