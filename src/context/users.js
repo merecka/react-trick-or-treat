@@ -6,7 +6,7 @@ function UsersProvider({ children }) {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:4000/users")
+    fetch(`${process.env.REACT_APP_API_URL}/users`)
       .then((r) => r.json())
       .then((users) => setUsers(users));
   }, []);
