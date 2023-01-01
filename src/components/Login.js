@@ -46,6 +46,7 @@ function Login({ setIsLoggedIn, users }) {
         <div className="form_container">
           <div className="title_container">
             <h2>Login</h2>
+            <h2>This is a test</h2>
           </div>
           <div className="row clearfix">
             <div className="">
