@@ -78,18 +78,19 @@ function Signup({ setIsLoggedIn, users, setUsers }) {
       host: formData.host === "true" ? true : false,
     });
 
-    await fetch(
-      `http://api.positionstack.com/v1/forward?access_key=${process.env.REACT_APP_POSSTACK_API_KEY}&query=${formData.address}`,
-      { referrerPolicy: "unsafe-url" }
-    )
-      .then((r) => r.json())
-      .then((coords) => {
-        formData.lat = coords.data[0].latitude;
-        formData.lng = coords.data[0].longitude;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // Uncomment code below to enable latitude / longitude lookup
+    // await fetch(
+    //   `http://api.positionstack.com/v1/forward?access_key=${process.env.REACT_APP_POSSTACK_API_KEY}&query=${formData.address}`,
+    //   { referrerPolicy: "unsafe-url" }
+    // )
+    //   .then((r) => r.json())
+    //   .then((coords) => {
+    //     formData.lat = coords.data[0].latitude;
+    //     formData.lng = coords.data[0].longitude;
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
 
     await fetch(`${process.env.REACT_APP_API_URL}/users`, {
       method: "POST",
